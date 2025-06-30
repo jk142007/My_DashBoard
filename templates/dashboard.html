@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🚀 Tool Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    body.light-mode {
+      background: #f2f2f2;
+      color: #111;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #00ffff;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .welcome {
+      margin-top: -10px;
+      margin-bottom: 20px;
+      font-size: 1rem;
+      color: #ddd;
+    }
+    .toggle {
+      margin: 20px;
+    }
+    .toggle label {
+      padding: 10px 20px;
+      background: #00ffff;
+      color: #111;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ffff;
+    }
+    body.light-mode .toggle label {
+      background: #111;
+      color: #fff;
+      box-shadow: 0 0 10px #111;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      width: 90%;
+      max-width: 1000px;
+    }
+    .card {
+      background: #1a1a1a;
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      color: #fff;
+      transition: 0.3s ease-in-out;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .card:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 0 25px #00ffff99;
+      background: #222;
+    }
+    .card a {
+      text-decoration: none;
+      color: #1fe5e5;
+      font-size: 1.2rem;
+      display: block;
+      margin-top: 10px;
+    }
+    .card a:hover {
+      color: #00ff99;
+    }
+    .emoji {
+      font-size: 2.5rem;
+    }
+    body.light-mode .card {
+      background: #ffffff;
+      color: #111;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    body.light-mode .card a {
+      color: #006666;
+    }
+    body.light-mode .card:hover {
+      background: #f0f0f0;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    .auth-links {
+      margin-bottom: 20px;
+    }
+    .auth-links a {
+      color: #00ffff;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .auth-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="toggle">
+    <label onclick="toggleMode()">🌗 Toggle Mode</label>
+  </div>
+
+  <h1>🚀 Welcome to Flask Mini Apps</h1>
+
+  <div class="welcome">
+    {% if session.user %}
+      Logged in as <strong>{{ session.user }}</strong>
+      <div class="auth-links">
+        <a href="/logout">Logout</a>
+      </div>
+    {% else %}
+      <div class="auth-links">
+        <a href="/login">Login</a> |
+        <a href="/register">Register</a>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <div class="emoji">🧮</div>
+      <strong>Calculator</strong>
+      <a href="/calculator">Open Tool →</a>
+    </div>
+    <div class="card">
+      <div class="emoji">💱</div>
+      <strong>Currency Converter</strong>
+      <a href="/converter">Open Tool →</a>
+    </div>
+    <div class="card">
+      <div class="emoji">🎯</div>
+      <strong>Guessing Game</strong>
+      <a href="/guess">Play Game →</a>
+    </div>
+    <div class="card">
+      <div class="emoji">📝</div>
+      <strong>Registration Form</strong>
+      <a href="/register">Fill Form →</a>
+    </div>
+    <div class="card">
+      <div class="emoji">✊📄✂️</div>
+      <strong>Rock Paper Scissors</strong>
+      <a href="/rps">Play Game →</a>
+    </div>
+    <div class="card">
+      <div class="emoji">📜</div>
+      <strong>Random Quote</strong>
+      <a href="/quote">Inspire Me →</a>
+    </div>
+    <div class="card">
+      <div class="emoji">☀️</div>
+      <strong>Weather Info</strong>
+      <a href="/weather">Check Weather →</a>
+    </div>
+
+ <div class="card">
+      <div class="emoji">✍️ </div>
+      <strong>Feedback Form</strong>
+      <a href="/feedback">Open Tool →</a>
+    </div>
+
+    <div class="card">
+      <div class="emoji">👥</div>
+      <strong>View Users</strong>
+      <a href="/view-users">See Users →</a>
+    </div>
+  </div>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle("light-mode");
+    }
+  </script>
+</body>
+</html>

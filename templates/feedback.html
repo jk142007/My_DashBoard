@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feedback - Flask Mini Apps</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.light-mode {
+      background: #f2f2f2;
+      color: #111;
+    }
+    .toggle {
+      margin: 1rem;
+    }
+    .toggle label {
+      padding: 6px 16px;
+      background: #00ffff;
+      color: #111;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 8px #00ffff;
+    }
+    body.light-mode .toggle label {
+      background: #111;
+      color: #fff;
+      box-shadow: 0 0 8px #111;
+    }
+    main {
+      background: rgba(0,0,0,0.8);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+    }
+    h2 {
+      color: #00ffff;
+      margin-bottom: 1rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    input, textarea {
+      padding: 0.8rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      outline: none;
+    }
+    button.submit-btn, .back-btn {
+      background: #00ffff;
+      color: #111;
+      font-weight: 600;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button.submit-btn:hover, .back-btn:hover {
+      background: #00cccc;
+    }
+    .thank-you {
+      padding: 2rem 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="toggle">
+  <label onclick="toggleMode()">🌗 Toggle Mode</label>
+</div>
+
+<main>
+  {% if thank_you %}
+  <div class="thank-you">
+    <h2>🎉 Thank you{% if name %}, {{ name }}{% endif %}!</h2>
+    <p>Your feedback has been recorded.</p>
+    <form method="GET">
+      <button class="submit-btn">Add Another Feedback</button>
+    </form>
+    <br>
+    <a href="/" class="back-btn">⬅️ Back to Dashboard</a>
+  </div>
+  {% else %}
+  <h2>🌟 Share Your Feedback</h2>
+  <form method="POST">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <textarea name="message" placeholder="Your Feedback" rows="5" required></textarea>
+    <button type="submit" class="submit-btn">Submit Feedback</button>
+  </form>
+  <br>
+  <a href="/" class="back-btn">⬅️ Back to Dashboard</a>
+  {% endif %}
+</main>
+
+<script>
+function toggleMode() {
+  document.body.classList.toggle("light-mode");
+}
+</script>
+
+{% if thank_you %}
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+window.onload = function () {
+  const duration = 5000;
+  const end = Date.now() + duration;
+  (function frame() {
+    confetti({
+      particleCount: 7,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 }
+    });
+    confetti({
+      particleCount: 7,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 }
+    });
+    if (Date.now() < end) requestAnimationFrame(frame);
+  })();
+};
+</script>
+{% endif %}
+
+</body>
+</html>
